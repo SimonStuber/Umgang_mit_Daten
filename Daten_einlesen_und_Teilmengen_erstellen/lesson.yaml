@@ -1,0 +1,143 @@
+- Class: meta
+  Course: Umgang mit Daten
+  Lesson: Daten einlesen und Teilmengen erstellen
+  Author: Simon Stuber
+  Type: Standard
+  Organization: Universitaet Koblenz/Landau
+  Version: 2.4.5
+
+- Class: text
+  Output: Willkommen zur zweiten interaktiven R-Uebung. Heute schauen wir uns an, wie wir in R mit Daten umgehen koennen. Dazu wurden mit der Installation dieser Uebung automatisch Daten heruntergeladen. In der Environment oben rechts, sehen Sie einige Objekte. Das Objekt lesson_dir, gibt den Pfad an des Ordners in welchem die Dateien der swirl-Lesson  hinterlegt sind. Die beiden anderen Objekte, geben den Pfad zu unseren Datensaetzen an. 
+
+- Class: cmd_question
+  Output: Wenn Sie das noch nicht getan haben, oeffnen Sie ein neues R-Skript. (File>New File> R Script). Geben Sie dann in ihr Skript "dateipfad_csv" (ohne Anfuehrungszeichen) ein und fuehren Sie die Zeile aus (Strg + Enter bzw. cmd + Return)
+  CorrectAnswer: dateipfad_csv
+  AnswerTests: omnitest(correctExpr='dateipfad_csv')
+  Hint: Haben sie alles korrekt geschrieben? Kontrollieren Sie Ihre eingabe noch einmal. 
+
+- Class: text
+  Output: Wie Sie sehen, wird Ihnen nun der Dateipfad angezeigt der zu dem Datensatz fuehrt. In unserem Swirl-Beispiel, haben wir den Dateipfad fuer Sie festgelegt. In der "echten Welt", muessen Sie diesen Dateipfad selbst festlegen. Dafuer muessen Sie sich die Eigenschaften der Daten-Datei in Ihrem Ordner anschauen und den Dateipfad ermitteln. Wenn Sie den Dateipfad kennen und in R uebernommen haben, konnen Sie die Daten einlesen (denken Sie daran, dass die Slashes richtig herum stehen (/ nicht \) und setzen Sie den Dateipfad in Anfuehrungszeichen). In dieser Swirl-Uebung, muessen Sie dies nicht tun. Der Dateipfad ist in diesem Beispiel fuer Sie in dem Objekt "dateipfad_csv" hinterlegt.
+
+- Class: cmd_question
+  Output: Wir beginnen mit den Daten im csv Format. Das ist eine Textdatei die Sie auch mit z.B. Excel oeffnen und bearbeiten koennen. Das Format ist sehr beliebt, weil es von den meisten Programmen gelesen werden kann. Daher wird es auch in R haeufig verwendet. Geben Sie nun "daten <- read.csv(dateipfad_csv, header=FALSE)" ein (ohne Anfuehrungszeichen) und fuehren Sie den Befehl aus.  
+  CorrectAnswer: daten <- read.csv(dateipfad_csv, header=FALSE)
+  AnswerTests: omnitest(correctExpr='daten <- read.csv(dateipfad_csv, header=FALSE)')
+  Hint: Haben Sie alles korrekt uebernommen? Kontrollieren Sie Ihre Eingabe noch einmal. 
+
+- Class: text
+  Output: Wie Sie sehen, ist nun ein neues Objekt in der Environment erschienen mit dem Namen "daten". In diesem Objekt sind Ihre Daten hinterlegt.  
+
+- Class: cmd_question
+  Output: Schauen Sie sich das Datenobjekt an, in dem Sie "View(daten)" (ohne Anfuehrungszeichen) eingeben und den Befehl ausfuehren. Dann oeffnet sich ein neues Fenster in welchem Sie die Daten betrachten koennen.
+  CorrectAnswer: View(daten)
+  AnswerTests: omnitest(correctExpr='View(daten)')
+  Hint: Beachten Sie, dass das V am Anfang grossgeschrieben ist. 
+
+- Class: text
+  Output: Schauen Sie sich die Daten genau an. Erkennen Sie, dass in der ersten Zeile nun Variablennamen stehen? Ganz oben, in der Ueberschriftenzeile, stehen, von R generierte, Variablennamen (Vx). Die Variablennamen die nun in der ersten Zeile des Datensatzes stehen, sollten eigentlich in der Ueberschriftenzeile stehen anstelle der Vx-Namen. Nun "denkt" R, dass die Variablennamen in der ersten Zeile Datenpunkte des Datensatzes sind. Wir muessen R also mitteilen, dass in der ersten Zeile die Ueberschriften stehen.   
+
+- Class: cmd_question
+  Output: Setzten Sie hierzu das header-Argument auf "TRUE" und laden Sie die Daten erneut ein. Verwenden Sie als Objektname wieder "daten" (ohne Anfuehrungszeichen und kleingeschrieben). Damit uberschreiben wir das alte Datenobjekt. Lesen Sie die Daten also genau so ein, wie Sie es einige Schritte zuvor getan haben. Setzten Sie das header-Argument allerdings auf "TRUE".  
+  CorrectAnswer: daten <- read.csv(dateipfad_csv, header=TRUE)
+  AnswerTests: omnitest(correctExpr='daten <- read.csv(dateipfad_csv, header=TRUE)')
+  Hint: Das war noch nicht ganz richtig. Ergaenzen Sie folgenden Befehl; daten <- read.csv(dateipfad_csv, header=) 
+
+- Class: cmd_question
+  Output: Geben Sie den Befehl ein um sich das Datenobjekt anzuschauen (View) und fuehren Sie ihre Eingabe aus.  
+  CorrectAnswer: View(daten)
+  AnswerTests: omnitest(correctExpr='View(daten)')
+  Hint: Der Befehl wird mit einem grossen V geschrieben und lautet View(daten)
+
+- Class: text
+  Output: Wie Sie sehen, werden die Ueberschriften jetzt richtig erkannt. Neben diesem Argument, gibt es noch einige andere Argumente die beim Einlesen von Daten nuetzlich sein koennen. Einige davon wurden im Lehrvideo vorgestellt. Welche Argumente es gibt, finden Sie am besten heraus, wenn Sie sich die Hilfeseite der Funktion anschauen. 
+
+- Class: mult_question
+  Output: Wie kommen Sie zur Hilfeseite der read.csv Funktion?
+  AnswerChoices: Mit ?read.csv; Mit help(read.csv); Mit read.csv?
+  CorrectAnswer: Mit ?read.csv
+  AnswerTests: omnitest(correctVal= 'Mit ?read.csv')
+  Hint: hint
+  
+- Class: cmd_question
+  Output: Geben Sie ?read.csv ein und fuehren Sie den Befehl aus. 
+  CorrectAnswer: ?read.csv
+  AnswerTests: omnitest(correctExpr='?read.csv')
+  Hint: Haben sie alles korrekt uebernommen?
+
+- Class: mult_question
+  Output: Schauen Sie sich die Hilfeseite an. Wie muss das sep-Argument spezifiziert werden um anzugeben, dass die Datenpunkte durch "white space" gerennt sind (das also keine z.B. kommagetrennte Daten vorliegen, sondern dass die einzelnen Datenpunkte nur durch Leerzeichen getrennt sind)? Die Antwort finden Sie auf der Hilfeseite der read.csv Funktion die im Fenster unten rechts im help-Reiter erschienen ist. 
+  AnswerChoices: Mit leeren Anfuehrungszeichen (""); Mit der quote-Funktion; Mit "white space"
+  CorrectAnswer: Mit leeren Anfuehrungszeichen ("")
+  AnswerTests: omnitest(correctVal= 'Mit leeren Anfuehrungszeichen ("")')
+  Hint: hint
+
+
+
+- Class: text
+  Output: Neben read.csv() gibt es noch verschiedene andere Funktionen zum Einlesen von csv-Dateien. Andere, sehr aehnliche, Funktionen sind read.csv2() und read.table(). Diese Funktionen Unterscheiden sich durch die Voreinstellungen. Wenn sie Argumente nicht explizit spezifizieren (z.B. sep=""), sondern diese Argumente einfach weglassen, dann wird automatisch die Voreinstellung fuer dieses Argument angenommen. Die verschiedenen Funktionen zum Einlesen von Daten unterscheiden sich in diesen Voreinstellungen. In der Praxis ist es daher ratsam, auch andere Funktionen auszuprobieren wenn es Probleme beim Einlesen der Daten gibt. 
+
+- Class: text
+  Output: Es gibt auch ein R-spezifisches Dateiformat fuer Daten. Das .rda Format. Wenn Sie ihre Daten ausschliesslich in R bearbeiten wollen und die Daten nicht in anderen Programmen wie Excel oder SPSS oeffnen muessen, koennen Sie die Daten im .rda-Format abspeichern. Dieses Format hat, gegenueber dem .csv-Format, den Vorteil, dass man keine weiteren Argumente braucht. Man muss die Daten auch nicht in einem Objekt hinterlegen. Stattdessen werden die Daten mit der load()-Funktion geladen. Es erscheint dann automatisch in der Environment das geladene Datenobjekt. Probleme wie falsch eingelesene Ueberschriften koennen dann nicht auftreten. 
+  
+- Class: cmd_question
+  Output: Fuheren Sie den Befehl load(dateipfad_rda) aus.  
+  CorrectAnswer: load(dateipfad_rda)
+  AnswerTests: omnitest(correctExpr='load(dateipfad_rda)')
+  Hint: Tippen Sie load(dateipfad_rda)
+
+- Class: text
+  Output: Mehr muessen Sie zu laden von .rda Daten nicht machen. 
+
+
+- Class: cmd_question
+  Output: Wir werden uns die Daten jetzt genauer anschauen. Zuerst wollen wir herausfinden, wieviele VPN an der Studie teilgenommen haben. Da in jeder Reihe des Datensatzes die Daten einer Person stehen, muessen wir nur die Anzahl der Reihen im Datensatz zaehlen. Dafuer koennen wir die nrow() Funktion verwenden. Zwischen den Klammern, muessen Sie den Namen des Datenobjekts eingeben ("daten"). Alternativ koennen sie mit der View() Funktion (das V ist gross) die Daten anschauen und ganz nach unten scrollen um herauszufinden wieviele Reihen es gibt. Zu guter Letzt koennen Sie auch oben rechts in der Environmentuebersicht schauen. Dort werden zum Objekt "daten" mehrere Infos angegeben. Die Angabe obs. gibt die Anzahl der Reihen an. Wie viele Versuchspersonen gibt es im Datensatz? Geben Sie die Zahl ein und fuehren Sie den Befehl aus. 
+  CorrectAnswer: 355
+  AnswerTests: omnitest(correctVal = 355)
+  Hint: Geben Sie die richtige Zahl ein. Mit nrow(daten) erhalten Sie die Anzahl der VPN.
+
+- Class: text
+  Output: Es gibt also insgesamt 355 TeilnehmerInnen. Oft ist es aber noetig, Teilmengen zu erstellen. Wir wollen dann z.B. ein Objekt erstellen, in welchem nur die Daten der Frauen hinterlegt sind. Im Datensatz, gibt es eine Variable names "geschl", in der das Geschlecht der VPN hinterlegt ist. Der Wert 1 steht fuer Frauen, der Wert 2 fuer Maenner.  
+
+- Class: cmd_question
+  Output: Verwenden Sie den Befehl daten$geschl um sich diese Variable ausgeben zu lassen.
+  CorrectAnswer: daten$geschl
+  AnswerTests: omnitest(correctExpr='daten$geschl')
+  Hint: Das stimmt noch nicht ganz. Schauen Sie noch einmal nach, ob Sie alles korret geschrieben haben. 
+
+- Class: text
+  Output: Fuer jede Person ist das Geschlecht hinterlegt. Das Dollarzeichen gibt an, dass wir aus dem Datenobjekt "daten" die Variable "geschl" selektieren wollen. Wir koennen diese Variable im naechsten Schritt dazu verwenden, nur TeilnehmerInnen zu selektieren, die auf der Variable "geschl" den Wert 1 haben. Um Teilmengen zu selektieren, verwenden wir eckige Klammern. Zwischen den Klammern werden erst die Reihen selektiert und dann, durch ein Komma getrennt, die Spalten. Der Befehl daten[1:10,c(5,25)] selektiert also die Reihen eins bis zehn und die Spalten fuenf und fuenfundzwanzig.
+
+
+- Class: cmd_question
+  Output: geben Sie folgenden Befehl ein, datenWeiblich <- daten[daten$geschl==1,]
+  CorrectAnswer: datenWeiblich <- daten[daten$geschl==1,]
+  AnswerTests: omnitest(correctExpr='datenWeiblich <- daten[daten$geschl==1,]')
+  Hint: Irgendwo hat sich noch ein Fehler versteckt. Kontrollieren Sie ihre Eingabe noch einmal ganz genau. Stimmen alle Anfuehrungszeichen, stimmt das Dollarzeichen? Haben sie zwei Gleichheitszeichen verwendet? Haben Sie an das Komma vor der letzten eckigen Klammer gedacht?
+
+- Class: text
+  Output: In der Environment ist nun ein weiteres Objekt erschienen namens datenWeiblich. In diesem Objekt sind nun nur die Daten der weiblichen VPN hinterlegt. In der eckigen Klammer, die wir verwendet haben um die Teilmenge zu selektieren, haben wir zuerst angeben, dass wir die Variable "geschl" aus dem Objekt "daten" verwenden. Mit dem doppelten Gleichheitszeichen, haben wir angegeben, dass wir auf der Variablen "geschl" nur den Wert 1 selektieren moechten. Dieser ganze Teil steht vor dem Komma. Er bezieht sich also auf die Reihen im Datensatz. D.h. wir selektieren alle Reihen fuer welche gillt, dass die Variable "geschl" den Wert 1 hat. Da jede VPN in einer eigenen Reihe steht, bedeutet dies, dass wir die Daten aller weiblichen VPN selektieren. Hinter dem Komma haben wir keinen Befehl eingegeben. Das bedeutet, dass wir alle Spalten selektieren (da wir nicht angeben, dass wir nur bestimmte Spalten selektieren wollen). 
+  
+
+- Class: text
+  Output: Im naechsten und letzten Schritt, wollen wir eine Teilmenge erstellen fuer alle maennlichen Teilnehmer. Dieses mal wollen wir allerdings nur Daten der Variablen sz1_1 und sz1_2 in unsere Teilmenge aufnehmen. Hierfuer muessen wir zuerst herausfinden, in welchen Spalten diese Variablen stehen.
+
+- Class: cmd_question
+  Output: Geben Sie den Befehl names(daten) ein und schauen Sie sich den Output genau an. 
+  CorrectAnswer: names(daten)
+  AnswerTests: omnitest(correctExpr='names(daten)')
+  Hint: Kontrollieren Sie Ihre Eingabe noch einmal. 
+
+- Class: text
+  Output: Die Variablen "sz1_1" und "sz1_2" stehen also in der dritten und vierten Spalte. Wenn wir unsere Teilmenge selektieren wollen, muessen wir also in den eckigen Klammern vor dem Komma eigeben, dass wir nur VPN mit dem Wert 2 auf der Variable "geschl" aus dem Datensatz "daten" selektieren wollen. Also [daten$geschl==2,]. Hinter dem Komma, muessen wir nun angeben, dass wir nur die Spalten drei bis vier selektieren wollen, also [,3:4].  
+
+- Class: cmd_question
+  Output: Kombinieren Sie die Selektion der Reihen (vor dem Komma) mit der Selektion der Spalten und erstellen Sie eine Teilmenge mit maennlichen Teilnehmern (Reihen) und die Variablen drei und vier aus dem Datensatz "daten". Ergaenzen Sie hierzu folgenden Befehl; datenMaennlich <- daten[,]
+  CorrectAnswer: datenMaennlich <- daten[daten$geschl==2, 3:4]
+  AnswerTests: omnitest(correctExpr='datenMaennlich <- daten[daten$geschl==2, 3:4]')
+  Hint: Vor dem Komma selektieren wir die Reihen, daten$geschl==2. Hinter dem Komman die Spalten, 3:4.
+
+- Class: text
+  Output: Das war die zweite interaktive R-Uebung. Bis naechste Woche!
+
+
+
